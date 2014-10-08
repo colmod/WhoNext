@@ -38,3 +38,4 @@ Icon
 
 #no need to add node_modules - should be downloaded as dependancies on target systems
 node_modules
+.idea
