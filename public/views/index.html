@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <base href="/">
+
+        <title>Who Next?</title>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="stylesheets/style.css"> <!-- custom styles -->
+
+        <!-- JS -->
+        <script src="libs/angular/angular.min.js"></script>
+        <script src="libs/angular-route/angular-route.min.js"></script>
+
+        <!-- ANGULAR CUSTOM -->
+        <script src="javascripts/controllers/MainCtrl.js"></script>
+        <script src="javascripts/controllers/ListCtrl.js"></script>
+        <script src="javascripts/clientRoutes.js"></script>
+        <script src="javascripts/client.js"></script>
+    </head>
+
+    <body ng-app="whoNextApp" ng-controller="ListController">
+        <div class="container">
+
+            <!-- HEADER -->
+            <nav class="navbar navbar-inverse">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">Stencil: Node and Angular</a>
+                </div>
+
+                <!-- LINK TO OUR PAGES. ANGULAR HANDLES THE ROUTING HERE -->
+                <ul class="nav navbar-nav">
+                    <li><a href="/list">List</a></li>
+                </ul>
+            </nav>
+
+            <!-- ANGULAR DYNAMIC CONTENT -->
+            <div ng-view></div>
+
+        </div>
+    </body>
+</html>
