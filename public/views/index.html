@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app="clientWhoNextApp" lang="en">
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,8 +25,10 @@
         <script src="libs/jquery/dist/jquery.min.js"></script>
 
         <!-- ANGULAR CUSTOM -->
-        <script src="javascripts/controllers/main.js"></script>
+        <script src="javascripts/controllers/listController.js"></script>
         <script src="javascripts/services/lists.js"></script>
+        <script src="javascripts/controllers/userController.js"></script>
+        <script src="javascripts/services/users.js"></script>
         <script src="javascripts/core.js"></script>
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -37,7 +39,7 @@
         <![endif]-->
     </head>
 
-    <body id="page-top" class="index" ng-controller="mainController">
+    <body id="page-top" class="index">
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
              <!-- Brand and toggle get grouped for better mobile display -->
@@ -72,102 +74,140 @@
             </div>
         </nav>
 
-        <!-- HEADER AND LIST COUNT -->
-         <header>
-            <div class="container">
-                <h1>Currently we are managing <span class="label label-info">{{ lists.length }}</span> Who Next lists.</h1>
-            </div>
-         </header>
+        <div ng-app="clientWhoNextApp" ng-controller="listController">
+            <!-- HEADER AND LIST COUNT -->
+             <header>
+                <div class="container">
+                    <h1>Currently we are managing <span class="label label-info">{{ lists.length }}</span> Who Next lists.</h1>
+                </div>
+             </header>
 
-         <section id="portfolio">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 text-center">
-                        <h2>Current Lists</h2>
-                        <hr class="star-primary">
-                    </div>
-                </div>
-                <!-- List LIST -->
-                <div class="row">
-                    <div class="col-lg-2 col-lg-offset-1">
-                        <div class="row control-group">
-                            <h3>Name</h3>
+             <section id="portfolio">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <h2>Current Lists</h2>
+                            <hr class="star-primary">
                         </div>
                     </div>
-                    <div class="col-lg-2 col-lg-offset-1">
-                        <div class="row control-group">
-                            <h3>Members</h3>
+                    <!-- List LIST -->
+                    <div class="row">
+                        <div class="col-lg-2 col-lg-offset-1">
+                            <div class="row control-group">
+                                <h3>Name</h3>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-2 col-lg-offset-1">
-                        <div class="row control-group">
-                            <h3>Delete</h3>
+                        <div class="col-lg-2 col-lg-offset-1">
+                            <div class="row control-group">
+                                <h3>Members</h3>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-2 col-lg-offset-1">
-                        <div class="row control-group">
-                            <h3>Who's Next?</h3>
+                        <div class="col-lg-2 col-lg-offset-1">
+                            <div class="row control-group">
+                                <h3>Delete</h3>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row" ng-repeat="list in lists">
-                    <div class="col-lg-2 col-lg-offset-1">
-                        <div class="row control-group">
-                            <p>{{ list.name }}</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-lg-offset-1">
-                        <div class="row control-group">
-                            <div ng-repeat="member in list.members">
-                                <p>{{member}}</p>
+                        <div class="col-lg-2 col-lg-offset-1">
+                            <div class="row control-group">
+                                <h3>Who's Next?</h3>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-2 col-lg-offset-1">
-                        <div class="row control-group">
-                            <h3><input type="checkbox" ng-click="deleteList(list._id)"></h3>
+                    <div class="row" ng-repeat="list in lists">
+                        <div class="col-lg-2 col-lg-offset-1">
+                            <div class="row control-group">
+                                <p>{{ list.name }}</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-lg-offset-1">
+                            <div class="row control-group">
+                                <div ng-repeat="member in list.members">
+                                    <p>{{member}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-lg-offset-1">
+                            <div class="row control-group">
+                                <h3><input type="checkbox" ng-click="deleteList(list._id)"></h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-lg-offset-1">
+                            <div class="row control-group">
+                                <h3><button type="submit" class="btn btn-primary btn-lg" ng-click="summat()">Who?</button></h3>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-lg-2 col-lg-offset-1">
-                        <div class="row control-group">
-                            <h3><button type="submit" class="btn btn-primary btn-lg" ng-click="summat()">Who?</button></h3>
-                        </div>
-                </div>
-            </div>
-         </section>
+                 </div>
+            </section>
 
-        <section class="success" id="about">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 text-center">
-                        <h2>Add new list</h2>
-                        <hr class="star-light">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>List Name:</label>
-                                <input type="text" class="form-control" placeholder="ListName" id="name" required data-validation-required-message="Please enter the list name." ng-model="formData.name">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>List Member:</label>
-                                <input type="text" class="form-control" placeholder="ListMember" id="name" required data-validation-required-message="Please enter the first list member."  ng-model="formData.members[0]">
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-4"><button type="submit" class="btn btn-success btn-lg" ng-click="createList()">Add</button></div>
+            <section class="success" id="about">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <h2>Add new list</h2>
+                            <hr class="star-light">
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div class="row control-group">
+                                <div class="form-group col-xs-12 floating-label-form-group controls">
+                                    <label>List Name:</label>
+                                    <input type="text" class="form-control" placeholder="ListName" id="name" required data-validation-required-message="Please enter the list name." ng-model="formData.name">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                            <div class="row control-group">
+                                <div class="form-group col-xs-12 floating-label-form-group controls">
+                                    <label>List Member:</label>
+                                    <input type="text" class="form-control" placeholder="ListMember" id="name" required data-validation-required-message="Please enter the first list member."  ng-model="formData.members[0]">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-4"><button type="submit" class="btn btn-success btn-lg" ng-click="createList()">Add</button></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
+
+        <div ng-app="clientWhoNextApp2" ng-controller="userController">
+            <section id="login">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <h2>Login</h2>
+                            <hr class="star-primary">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div class="row control-group">
+                                <div class="form-group col-xs-12 floating-label-form-group controls">
+                                    <label>Username</label>
+                                    <input type="text" class="form-control" placeholder="Username" id="username" required data-validation-required-message="Please enter your username." ng-model="formData.username">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                            <div class="row control-group">
+                                <div class="form-group col-xs-12 floating-label-form-group controls">
+                                    <label>Password</label>
+                                    <input type="email" class="form-control" placeholder="Password" id="email" required data-validation-required-message="Please enter your password." ng-model="formData.password">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-4"><button type="submit" class="btn btn-success btn-lg" ng-click="login()">Login</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
 
         <!-- Contact Section -->
         <section id="contact">
@@ -224,59 +264,59 @@
             </div>
         </section>
 
-            <!-- Footer -->
-            <footer class="text-center">
-                <div class="footer-above">
-                    <div class="container">
-                        <div class="row">
-                            <div class="footer-col col-md-4">
-                                <h3>Location</h3>
-                                <p>Dublin<br>Ireland</p>
-                            </div>
-                            <div class="footer-col col-md-4">
-                                <h3>Around the Web</h3>
-                                <ul class="list-inline">
-                                    <li>
-                                        <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-dribbble"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="footer-col col-md-4">
-                                <h3>About Who's List</h3>
-                                <p>This is a hobby site created by <a href="http://creditme.io">CreditMe</a>.</p>
-                            </div>
+        <!-- Footer -->
+        <footer class="text-center">
+            <div class="footer-above">
+                <div class="container">
+                    <div class="row">
+                        <div class="footer-col col-md-4">
+                            <h3>Location</h3>
+                            <p>Dublin<br>Ireland</p>
+                        </div>
+                        <div class="footer-col col-md-4">
+                            <h3>Around the Web</h3>
+                            <ul class="list-inline">
+                                <li>
+                                    <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-linkedin"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-dribbble"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="footer-col col-md-4">
+                            <h3>About Who's List</h3>
+                            <p>This is a hobby site created by <a href="http://creditme.io">CreditMe</a>.</p>
                         </div>
                     </div>
                 </div>
-                <div class="footer-below">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                Copyright &copy; CreditMe 2014
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-
-            <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
-            <div class="scroll-top page-scroll visible-xs visble-sm">
-                <a class="btn btn-primary" href="#page-top">
-                    <i class="fa fa-chevron-up"></i>
-                </a>
             </div>
+            <div class="footer-below">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            Copyright &copy; CreditMe 2014
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+        <div class="scroll-top page-scroll visible-xs visble-sm">
+            <a class="btn btn-primary" href="#page-top">
+                <i class="fa fa-chevron-up"></i>
+            </a>
+        </div>
 
     </body>
 </html>

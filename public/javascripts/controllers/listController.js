@@ -1,4 +1,4 @@
-angular.module('listController', []).controller('mainController', ['$scope', '$http', 'Lists', function($scope, $http , Lists) {
+angular.module('listModule', []).controller('listController', ['$scope', '$http', 'Lists', function($scope, $http , Lists) {
     $scope.formData = {};
     $scope.loading = true;
 

@@ -4,7 +4,8 @@ var express = require('express'),
     logger = require('morgan'),
     cookieParser = require('cookie-parser'),
     bodyParser = require('body-parser'),
-    http = require('http'),
+    https = require('https'),
+    fs = require('fs'),
     mongoose = require('mongoose');
 
 var appName = 'WhoNext';
@@ -24,8 +25,13 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Read in PEMs to support HTTPS
+var options = { key: fs.readFileSync('./key.pem'), cert: fs.readFileSync('./key-cert.pem') };
+
 // Set up API routes
 var apiRouter = require('./routes/api-router.js')(app);
+var userRouter = require('./routes/user-router.js')(app);
+var errorRouter = require('./routes/error-router.js')(app);
 
 // development error handler
 // will print stacktrace
@@ -66,7 +72,7 @@ mongoose.connect(db, function (err, res) {
 
 module.exports = app;
 
-http.createServer(app).listen(app.get('port'), function() {
+https.createServer(options, app).listen(app.get('port'), function() {
     console.log(appName + ' using Node, Express and Mongoose listening on port %d', app.get('port'));
     console.log('Using ' + dbName + ' at ' + dbURL);
 });

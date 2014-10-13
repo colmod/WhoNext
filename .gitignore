@@ -39,3 +39,6 @@ Icon
 #no need to add node_modules - should be downloaded as dependancies on target systems
 node_modules
 .idea
+
+#incase a pem is left in the dev environment
+*.pem
