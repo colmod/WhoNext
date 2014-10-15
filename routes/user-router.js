@@ -2,11 +2,6 @@ var UserModel = require('../models/User.js');
 
 module.exports = function(app) {
 
-// test route to make sure everything is working (accessed at GET http://localhost:8080/api)
-    app.get('/api', function (req, res) {
-        res.json({ message: 'what are you doing - what are you trying to accomplish?' });
-    });
-
     // Get all users
     app.get('/api/user', function (req, res) {
         return UserModel.find(function (err, user) {

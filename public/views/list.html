@@ -1,7 +1,97 @@
-<!-- public/views/list.html -->
+<div ng-controller="listController">
+    <header>
+        <div class="container">
+            <h1>Currently we are managing <span class="label label-info">{{ wnLists.length }}</span> Who Next lists.</h1>
+        </div>
+    </header>
 
-<div class="jumbotron text-center">
-    <h1>List Page 4 Life</h1>
+    <section id="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Current Lists</h2>
+                    <hr class="star-primary">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2 col-lg-offset-1">
+                    <div class="row control-group">
+                        <h3>Name</h3>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-lg-offset-1">
+                    <div class="row control-group">
+                        <h3>Members</h3>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-lg-offset-1">
+                    <div class="row control-group">
+                        <h3>Delete</h3>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-lg-offset-1">
+                    <div class="row control-group">
+                        <h3>Who's Next?</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row" ng-repeat="list in wnLists">
+                <div class="col-lg-2 col-lg-offset-1">
+                    <div class="row control-group">
+                        <p>{{ list.name }}</p>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-lg-offset-1">
+                    <div class="row control-group">
+                        <div ng-repeat="member in list.members">
+                            <p>{{member}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-lg-offset-1">
+                    <div class="row control-group">
+                        <h3><input type="checkbox" ng-click="deleteList(list._id)"></h3>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-lg-offset-1">
+                    <div class="row control-group">
+                        <h3><button type="submit" class="btn btn-primary btn-lg" ng-click="summat()">Who?</button></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <p>{{ tagline }}</p>
+    <section class="success" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Add new list</h2>
+                    <hr class="star-light">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="row control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label>List Name:</label>
+                            <input type="text" class="form-control" placeholder="ListName" id="listname" required data-validation-required-message="Please enter the list name." ng-model="formData.name">
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                    <div class="row control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label>List Member:</label>
+                            <input type="text" class="form-control" placeholder="ListMember" id="listmembers" required data-validation-required-message="Please enter the first list member."  ng-model="formData.members[0]">
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-4"><button type="submit" class="btn btn-success btn-lg" ng-click="createList()">Add</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>

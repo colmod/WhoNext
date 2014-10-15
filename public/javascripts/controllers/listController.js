@@ -1,10 +1,12 @@
-angular.module('listModule', []).controller('listController', ['$scope', '$http', 'Lists', function($scope, $http , Lists) {
+var listModule = angular.module('listModule', []);
+
+listModule.controller('listController', function ($scope, $http , Lists) {
     $scope.formData = {};
     $scope.loading = true;
 
     Lists.get().success(function(data) {
         console.log("get is called in the listController");
-        $scope.lists = data;
+        $scope.wnLists = data;
         $scope.loading = false;
     });
 
@@ -16,7 +18,7 @@ angular.module('listModule', []).controller('listController', ['$scope', '$http'
             Lists.create($scope.formData).success(function(data) {
                 $scope.loading = false;
                 $scope.formData = {};
-                $scope.lists = data;
+                $scope.wnLists = data;
             });
         }
     };
@@ -33,4 +35,4 @@ angular.module('listModule', []).controller('listController', ['$scope', '$http'
                 console.log('Error: ' + data);
             });
     };
-}]);
+});

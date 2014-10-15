@@ -1,0 +1,43 @@
+<!--<div ng-module="userModule">-->
+
+<div ng-controller="userController" >
+    <section id="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Login</h2>
+                    <hr class="star-primary">
+                </div>
+            </div>
+            <div class="row">
+                <div class="container">
+                    <h1>Currently we are managing <span class="label label-info">{{ users.length }}</span> users.</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="row control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label>Username</label>
+                            <input type="text" class="form-control" placeholder="Username" id="username" required data-validation-required-message="Please enter your username." ng-model="formData.username">
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                    <div class="row control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label>Password</label>
+                            <input type="email" class="form-control" placeholder="Password" id="password" required data-validation-required-message="Please enter your password." ng-model="formData.password">
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-4"><button type="submit" class="btn btn-success btn-lg" ng-click="createUser()">Create User</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<!--</div>-->
+

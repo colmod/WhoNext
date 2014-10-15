@@ -31,7 +31,7 @@ var options = { key: fs.readFileSync('./key.pem'), cert: fs.readFileSync('./key-
 // Set up API routes
 var apiRouter = require('./routes/api-router.js')(app);
 var userRouter = require('./routes/user-router.js')(app);
-var errorRouter = require('./routes/error-router.js')(app);
+var defaultRouter = require('./routes/default-router.js')(app);
 
 // development error handler
 // will print stacktrace
